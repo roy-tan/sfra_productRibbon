@@ -16,11 +16,14 @@ var bonusOrderLineItem = require('*/cartridge/models/productLineItem/bonusOrderL
 var bundleOrderLineItem = require('*/cartridge/models/productLineItem/bundleOrderLineItem');
 
 module.exports = {
-    get: function (params) {
+    get: function(params) {
         var productId = params.pid;
-        var apiProduct = ProductMgr.getProduct(productId);
-        var productType = productHelper.getProductType(apiProduct);
         var product = Object.create(null);
+        var apiProduct = ProductMgr.getProduct(productId);
+        if (apiProduct === null) {
+            return product;
+        }
+        var productType = productHelper.getProductType(apiProduct);
         var options = null;
         var promotions;
 
@@ -29,7 +32,7 @@ module.exports = {
                 promotions = PromotionMgr.activeCustomerPromotions.getProductPromotions(apiProduct);
                 var optionsModel = productHelper.getCurrentOptionModel(apiProduct.optionModel, params.options);
                 options = {
-                    optionModel: optionsModel,	
+                    optionModel: optionsModel,
                     promotions: promotions
                 };
                 product = productTile(product, apiProduct, productType, options);
@@ -60,9 +63,9 @@ module.exports = {
                             optionModelBundle,
                             productHelper.getLineItemOptions(optionLineItemsBundle, productId)
                         );
-                        var lineItemOptionsBundle = optionLineItemsBundle.length
-                            ? productHelper.getLineItemOptionNames(optionLineItemsBundle)
-                            : productHelper.getDefaultOptions(optionModelBundle, optionModelBundle.options);
+                        var lineItemOptionsBundle = optionLineItemsBundle.length ?
+                            productHelper.getLineItemOptionNames(optionLineItemsBundle) :
+                            productHelper.getDefaultOptions(optionModelBundle, optionModelBundle.options);
 
 
                         options.variationModel = variationsBundle;
@@ -110,9 +113,9 @@ module.exports = {
                             optionModelPLI,
                             productHelper.getLineItemOptions(optionLineItemsPLI, productId)
                         );
-                        var lineItemOptionsPLI = optionLineItemsPLI.length
-                            ? productHelper.getLineItemOptionNames(optionLineItemsPLI)
-                            : productHelper.getDefaultOptions(optionModelPLI, optionModelPLI.options);
+                        var lineItemOptionsPLI = optionLineItemsPLI.length ?
+                            productHelper.getLineItemOptionNames(optionLineItemsPLI) :
+                            productHelper.getDefaultOptions(optionModelPLI, optionModelPLI.options);
 
 
                         options.variationModel = variationsPLI;
