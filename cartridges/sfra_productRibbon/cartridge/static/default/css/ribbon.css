@@ -1,26 +1,30 @@
 .ribbon-image {
-  position: absolute;
-  width: 35%;
+    position: absolute;
+    width: 35%;
 }
 
 .ribbon-tile {
-  font-size: 10px;
-  color: #fff;
-   text-align: center;
-  font-weight: bold;
-  line-height: 20px;
-  transform: rotate(-45deg);
-  width: 100%;
-  display: block;
-  background: red;
-  position: absolute;
-  top: 10px;
+    font-size: 10px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    line-height: 20px;
+    transform: rotate(-45deg);
+    width: 100%;
+    display: block;
+    background: red;
+    position: absolute;
+    top: 10px;
 }
 
-@media (max-width: 767.98px) {   
-  .ribbon-tile {right: 60px;}
+@media (max-width: 767.98px) {
+    .ribbon-tile {
+        right: 60px;
+    }
 }
 
 @media (min-width: 768px) {
-  .ribbon-tile {right: 90px;}
+    .ribbon-tile {
+        right: 90px;
+    }
 }
